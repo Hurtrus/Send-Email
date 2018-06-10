@@ -20,23 +20,35 @@ function Send-EMAIL
         [string]$emailBody,
         [Parameter()]
         [ValidateNotNullOrEmpty()]
-        [string]$SMTPServer = "yourmail-Server1.Fully.QualifiedDomain.com" 
-        ) 
+        [string]$SMTPServer = "yourmail-Server1.Fully.QualifiedDomain.com",
+        [parameter()]
+        [AllowNull()]
+        [String[]]$EmailAttachment
+    ) 
 
-	#################################### 
+    #################################### 
 	
-	$message = new-object System.Net.Mail.MailMessage
-	$message.From = $fromAddress
-	$message.To.Add($SendTo)
-	$message.To.Add($fromAddress)
-	$message.IsBodyHtml = $True
-	$message.Subject = $Subject
-	$message.body = $emailBody
-	$smtp = new-object Net.Mail.SmtpClient($SMTPServer)
-	$smtp.Send($message)
+    $message = new-object System.Net.Mail.MailMessage
+    $message.From = $fromAddress
+    $message.To.Add($SendTo)
+    $message.IsBodyHtml = $True
+    $message.Subject = $Subject
+    $message.body = $emailBody
+    if ($CC)
+    {
+        $message.To.Add($CC)
+    }
+    if ($EmailAttachment)
+    {
+        $Attachment = new-object Net.Mail.Attachment($EmailAttachment)
+        $message.Attachments.Add($Attachment)
+    }
+
+    $smtp = new-object Net.Mail.SmtpClient($SMTPServer)
+    $smtp.Send($message)
 	
-	$message.Dispose();
-	$smtp.Dispose()
+    $message.Dispose();
+    $smtp.Dispose()
 }
 
 
