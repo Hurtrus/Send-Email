@@ -27,7 +27,9 @@ You can set the $SMTPServer variable each time you use the function or you can h
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string]$SMTPServer,
-- TO -
+		
+change to
+
         [Parameter()]
         [ValidateNotNullOrEmpty()]
         [string]$SMTPServer = "yourmail-Server1.Fully.QualifiedDomain.com",
