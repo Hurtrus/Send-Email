@@ -29,7 +29,7 @@ You can set the $SMTPServer variable each time you use the function or you can h
         [ValidateNotNullOrEmpty()]
         [string]$SMTPServer,
 		
-change to
+ to
 
         [Parameter()]
         [ValidateNotNullOrEmpty()]
