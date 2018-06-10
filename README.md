@@ -16,6 +16,25 @@ You will need to supply the $SendTo, $CC, $Subject, $Email Body
 There are two full use examples. Depending on how you include the function, you will need to use the correct method.
 
 ## EXAMPLES
+### Example $SMTPServer
+```powershell
+$SMTPServer = "yourmail-Server1.Fully.QualifiedDomain.com"
+
+```
+
+Knowing this setting is a prerequisite to using this function. 
+You can set the $SMTPServer variable each time you use the function or you can hard set it in the function by changing:
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string]$SMTPServer,
+- TO -
+        [Parameter()]
+        [ValidateNotNullOrEmpty()]
+        [string]$SMTPServer = "yourmail-Server1.Fully.QualifiedDomain.com",
+
+
+If you hard set the $SMTPServer value in the Param block, you will not need to specify it again when using the function.
+
 
 ### Example $fromAddress
 ```powershell
@@ -60,6 +79,7 @@ Create the variable $Subject with the Subject line you with to send with the ema
 Import-Module Send-Email
 
 $EmailProperties = @{
+'SMTPServer' = "yourmail-Server1.Fully.QualifiedDomain.com"
 'fromAddress' = "scott@Hurtrus.systems"
 'SendTo' = "scott@Hurtrus.systems"
 #'CC' = "ccrecipiant1@email.com","ccrecipiant2@email.com"
@@ -85,6 +105,8 @@ Send-EMAIL @EmailProperties
 
 ### Example if the module is included in your script
 ```powershell
+
+$SMTPServer = "yourmail-Server1.Fully.QualifiedDomain.com"
 $fromAddress = "My Groups Name <sender@email.com>"
 $SendTo = "recipient@email.com"
 $CC = "ccrecipiant1@email.com","ccrecipiant2@email.com"

@@ -2,6 +2,9 @@ function Send-EMAIL
 {
     [CmdletBinding()]
     Param (
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string]$SMTPServer,
         [Parameter()]
         [ValidateNotNullOrEmpty()]
         [string]$fromAddress = ((Get-CimInstance win32_computersystem).Username.split("\")[1] | Get-ADUser -Properties givenname, surname, mail).mail,
@@ -18,9 +21,6 @@ function Send-EMAIL
         [Parameter()]
         [ValidateNotNullOrEmpty()]
         [string]$emailBody,
-        [Parameter()]
-        [ValidateNotNullOrEmpty()]
-        [string]$SMTPServer = "yourmail-Server1.Fully.QualifiedDomain.com",
         [parameter()]
         [AllowNull()]
         [String[]]$EmailAttachment
