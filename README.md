@@ -23,7 +23,8 @@ $SMTPServer = "yourmail-Server1.Fully.QualifiedDomain.com"
 ```
 
 Knowing this setting is a prerequisite to using this function. 
-You can set the $SMTPServer variable each time you use the function or you can hard set it in the function by changing:
+You will need to define values for the $SMTPServer variable each time you use the function. 
+If you hard set the $SMTPServer value in the Param block, you will not need to define values when using the function. To hard set the value in the Param block:
 
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
