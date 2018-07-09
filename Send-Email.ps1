@@ -21,7 +21,7 @@ function Send-EMAIL
         [Parameter()]
         [ValidateNotNullOrEmpty()]
         [string]$emailBody,
-        [parameter()]
+        [parameter(ValueFromPipeline=$true)]
         [AllowNull()]
         [String[]]$EmailAttachment
     ) 
